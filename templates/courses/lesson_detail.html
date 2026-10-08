@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ lesson.title }} - Smart E-Learning</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+
+        .lesson-container {
+            width: 70%;
+            margin: 45px auto;
+        }
+
+
+        .lesson-header {
+            background-color: white;
+            padding: 35px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+
+        .lesson-icon {
+            font-size: 55px;
+            color: #2563eb;
+        }
+
+
+        .lesson-header h1 {
+            color: #1e3a8a;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+
+        .lesson-header p {
+            color: #666;
+        }
+
+
+        .content {
+            background-color: white;
+            padding: 30px;
+            margin-top: 25px;
+            border-radius: 10px;
+        }
+
+
+        .content h2 {
+            color: #1e3a8a;
+        }
+
+
+        .content h2 i {
+            color: #2563eb;
+            margin-right: 8px;
+        }
+
+
+        .content-text {
+            color: #444;
+            font-size: 17px;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+
+        .complete-button {
+            padding: 12px 20px;
+            background-color: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+
+        .complete-button i {
+            margin-right: 7px;
+        }
+
+
+        .completed {
+            color: #16a34a;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+
+        .quiz-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #7c3aed;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+
+        .quiz-button i {
+            margin-right: 7px;
+        }
+
+
+        .ai-quiz-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+
+        .ai-quiz-button i {
+            margin-right: 7px;
+        }
+
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background-color: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+        .back i {
+            margin-right: 7px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+
+        footer p {
+            color: white;
+            margin: 7px;
+        }
+
+
+        .support-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        .support-email {
+            font-size: 14px;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+
+            .lesson-container {
+                width: 85%;
+            }
+
+
+            .lesson-header {
+                padding: 25px;
+            }
+
+
+            .lesson-header h1 {
+                font-size: 27px;
+            }
+
+
+            .content {
+                padding: 25px;
+            }
+
+
+            .quiz-button {
+                margin: 5px;
+                margin-top: 10px;
+            }
+
+
+            .ai-quiz-button {
+                margin: 5px;
+                margin-top: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="navbar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            Smart E-Learning
+
+        </div>
+
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="{% url 'course_list' %}">
+                Courses
+            </a>
+
+            <a href="{% url 'tutor_home' %}">
+                AI Tutor
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="lesson-container">
+
+
+        <div class="lesson-header">
+
+            <div class="lesson-icon">
+
+                <i class="fa-solid fa-book-open"></i>
+
+            </div>
+
+
+            <h1>
+                {{ lesson.title }}
+            </h1>
+
+
+            <p>
+                Learn this lesson and test your knowledge with the quiz.
+            </p>
+
+        </div>
+
+
+
+        <div class="content">
+
+
+            <h2>
+
+                <i class="fa-solid fa-file-lines"></i>
+
+                Lesson Content
+
+            </h2>
+
+
+            <p class="content-text">
+                {{ lesson.content }}
+            </p>
+
+
+            <div class="actions">
+
+
+                {% if progress.completed %}
+
+                    <p class="completed">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Lesson Completed
+
+                    </p>
+
+                {% else %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <button type="submit"
+                                class="complete-button">
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Mark as Completed
+
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+
+
+                {% if quiz %}
+
+                    <a href="{% url 'quiz' quiz.id %}"
+                       class="quiz-button">
+
+                        <i class="fa-solid fa-clipboard-question"></i>
+
+                        Take Quiz
+
+                    </a>
+
+                {% endif %}
+
+
+
+                <a href="{% url 'generate_ai_quiz' lesson.id %}"
+                   class="ai-quiz-button">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    Generate AI Quiz
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <a href="{% url 'course_detail' lesson.course.id %}"
+           class="back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Course
+
+        </a>
+
+
+    </div>
+
+
+
+    <footer>
+
+        <p class="support-title">
+            <i class="fa-solid fa-headset"></i>
+            Smart E-Learning Support Team
+        </p>
+
+        <p>
+            Need help? We are here to assist you.
+        </p>
+
+        <p class="support-email">
+            <i class="fa-solid fa-envelope"></i>
+            support@smartelearning.com
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

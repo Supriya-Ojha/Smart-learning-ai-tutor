@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .header {
+            background-color: #4f46e5;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .container {
+            width: 70%;
+            margin: 30px auto;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .course-name {
+            color: #4f46e5;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 220px;
+            resize: vertical;
+        }
+
+        .submit {
+            margin-top: 25px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4f46e5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>{{ page_title }}</h1>
+        <p>Smart E-Learning Management System</p>
+    </div>
+
+    <div class="container">
+
+        <div class="form-box">
+
+            <div class="course-name">
+                Course: {{ course.title }}
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label>Lesson Title</label>
+
+                <input
+                    type="text"
+                    name="title"
+                    value="{{ lesson.title|default:'' }}"
+                    required
+                >
+
+                <label>Lesson Content</label>
+
+                <textarea
+                    name="content"
+                    required
+                >{{ lesson.content|default:'' }}</textarea>
+
+                <label>Video URL</label>
+
+                <input
+                    type="url"
+                    name="video_url"
+                    value="{{ lesson.video_url|default:'' }}"
+                    placeholder="https://example.com/video"
+                >
+
+                <button class="submit" type="submit">
+                    Save Lesson
+                </button>
+
+            </form>
+
+            <a class="back" href="{% url 'manage_lessons' course.id %}">
+                ← Back to Lessons
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

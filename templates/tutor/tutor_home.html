@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Tutor</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f8fc;
+        }
+
+        nav {
+            background-color: #2563eb;
+            padding: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #1e3a8a;
+        }
+
+        .heading p {
+            color: #555;
+        }
+
+        .tutor-box,
+        .history-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+            margin-top: 12px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .answer-box {
+            background-color: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 8px;
+        }
+
+        .answer-box h3 {
+            color: #1e40af;
+            margin-top: 0;
+        }
+
+        .chat-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 12px;
+            background-color: #fafafa;
+        }
+
+        .chat-question {
+            padding: 16px;
+            cursor: pointer;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        .chat-question:hover {
+            background-color: #f0f5ff;
+        }
+
+        .chat-answer {
+            padding: 16px;
+            border-top: 1px solid #ddd;
+            color: #333;
+            line-height: 1.6;
+            background-color: white;
+        }
+
+        .date {
+            padding: 0 16px 14px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .clear-button {
+            background-color: #dc2626;
+        }
+
+        .clear-button:hover {
+            background-color: #b91c1c;
+        }
+
+        .empty {
+            color: #777;
+            text-align: center;
+            padding: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <a href="/">Home</a>
+
+    <a href="/courses/">Courses</a>
+
+    <a href="/tutor/">AI Tutor</a>
+
+    {% if user.is_authenticated %}
+        <a href="/dashboard/">Dashboard</a>
+    {% endif %}
+
+</nav>
+
+
+<div class="container">
+
+
+    <div class="heading">
+
+        <h1>🤖 AI Tutor</h1>
+
+        <p>
+            Ask questions, learn concepts and practice with your
+            personal AI Tutor.
+        </p>
+
+    </div>
+
+
+    <!-- ASK QUESTION -->
+
+    <div class="tutor-box">
+
+        <h2>Ask Your Question</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <textarea
+                name="question"
+                placeholder="Example: Explain inheritance in Python..."
+                required></textarea>
+
+            <br>
+
+            <button type="submit">
+                🤖 Ask AI Tutor
+            </button>
+
+        </form>
+
+
+        {% if answer %}
+
+        <div class="answer-box">
+
+            <h3>🤖 AI Tutor Answer</h3>
+
+            <div>
+                {{ answer|linebreaks }}
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- CHAT HISTORY -->
+
+    {% if user.is_authenticated %}
+
+    <div class="history-section">
+
+        <h2>💬 Recent Chat History</h2>
+
+
+        {% if history %}
+
+            {% for chat in history %}
+
+            <details class="chat-item">
+
+                <summary class="chat-question">
+
+                    {{ chat.question }}
+
+                </summary>
+
+
+                <div class="chat-answer">
+
+                    <strong>🤖 AI Tutor:</strong>
+
+                    {{ chat.answer|linebreaks }}
+
+                </div>
+
+
+                <div class="date">
+
+                    {{ chat.created_at|date:"d M Y, h:i A" }}
+
+                </div>
+
+            </details>
+
+            {% endfor %}
+
+
+            <form method="POST"
+                  action="/tutor/clear/"
+                  onsubmit="return confirm('Are you sure you want to clear your chat history?');">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="clear-button">
+
+                    🗑 Clear Chat History
+
+                </button>
+
+            </form>
+
+
+        {% else %}
+
+            <div class="empty">
+
+                No chat history yet.
+
+                Start asking questions to your AI Tutor!
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page_title }}</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-area {
+            margin-top: 20px;
+        }
+
+        .checkbox-area label {
+            display: inline;
+            margin-left: 5px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .save-btn {
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            margin-left: 8px;
+        }
+
+        .save-btn:hover {
+            background-color: #146c43;
+        }
+
+        .cancel-btn:hover {
+            background-color: #5c636a;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>{{ page_title }}</h1>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <label for="title">
+                Quiz Title
+            </label>
+
+            <input
+                type="text"
+                id="title"
+                name="title"
+                value="{{ quiz.title|default:'' }}"
+                placeholder="Enter quiz title"
+                required
+            >
+
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                placeholder="Enter quiz description"
+            >{{ quiz.description|default:'' }}</textarea>
+
+
+            <div class="checkbox-area">
+
+                <input
+                    type="checkbox"
+                    id="is_ai_generated"
+                    name="is_ai_generated"
+                    {% if quiz.is_ai_generated %}checked{% endif %}
+                >
+
+                <label for="is_ai_generated">
+                    This is an AI Generated Quiz
+                </label>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    {{ button_text }}
+                </button>
+
+
+                <a
+                    href="{% url 'quiz_list' %}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

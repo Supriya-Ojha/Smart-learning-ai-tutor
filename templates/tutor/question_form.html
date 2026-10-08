@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page_title }}</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .quiz-name {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        textarea,
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        select {
+            background-color: white;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .save-btn {
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            margin-left: 8px;
+        }
+
+        .save-btn:hover {
+            background-color: #146c43;
+        }
+
+        .cancel-btn:hover {
+            background-color: #5c636a;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>
+            {{ page_title }}
+        </h1>
+
+
+        <p class="quiz-name">
+
+            Quiz:
+            <strong>{{ quiz.title }}</strong>
+
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- QUESTION -->
+
+            <label for="question_text">
+                Question
+            </label>
+
+            <textarea
+                id="question_text"
+                name="question_text"
+                placeholder="Enter your question"
+                required
+            >{{ question.question_text|default:'' }}</textarea>
+
+
+            <!-- OPTION A -->
+
+            <label for="option_a">
+                Option A
+            </label>
+
+            <input
+                type="text"
+                id="option_a"
+                name="option_a"
+                value="{{ question.option_a|default:'' }}"
+                placeholder="Enter option A"
+                required
+            >
+
+
+            <!-- OPTION B -->
+
+            <label for="option_b">
+                Option B
+            </label>
+
+            <input
+                type="text"
+                id="option_b"
+                name="option_b"
+                value="{{ question.option_b|default:'' }}"
+                placeholder="Enter option B"
+                required
+            >
+
+
+            <!-- OPTION C -->
+
+            <label for="option_c">
+                Option C
+            </label>
+
+            <input
+                type="text"
+                id="option_c"
+                name="option_c"
+                value="{{ question.option_c|default:'' }}"
+                placeholder="Enter option C"
+                required
+            >
+
+
+            <!-- OPTION D -->
+
+            <label for="option_d">
+                Option D
+            </label>
+
+            <input
+                type="text"
+                id="option_d"
+                name="option_d"
+                value="{{ question.option_d|default:'' }}"
+                placeholder="Enter option D"
+                required
+            >
+
+
+            <!-- CORRECT ANSWER -->
+
+            <label for="correct_answer">
+                Correct Answer
+            </label>
+
+            <select
+                id="correct_answer"
+                name="correct_answer"
+                required
+            >
+
+                <option value="">
+                    Select correct answer
+                </option>
+
+                <option
+                    value="A"
+                    {% if question.correct_answer == "A" %}
+                        selected
+                    {% endif %}
+                >
+                    A
+                </option>
+
+                <option
+                    value="B"
+                    {% if question.correct_answer == "B" %}
+                        selected
+                    {% endif %}
+                >
+                    B
+                </option>
+
+                <option
+                    value="C"
+                    {% if question.correct_answer == "C" %}
+                        selected
+                    {% endif %}
+                >
+                    C
+                </option>
+
+                <option
+                    value="D"
+                    {% if question.correct_answer == "D" %}
+                        selected
+                    {% endif %}
+                >
+                    D
+                </option>
+
+            </select>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    {{ button_text }}
+                </button>
+
+
+                <a
+                    href="{% url 'question_list' quiz.id %}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

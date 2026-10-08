@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ course.title }} - Smart E-Learning</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+
+        .course {
+            width: 70%;
+            margin: 45px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+
+        .course-icon {
+            text-align: center;
+            font-size: 55px;
+            color: #2563eb;
+        }
+
+
+        .course h1 {
+            color: #1e3a8a;
+            font-size: 34px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+
+        .course-description {
+            color: #555;
+            line-height: 1.7;
+            font-size: 17px;
+            text-align: center;
+        }
+
+
+        .info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+
+        .info-box {
+            background-color: #eff6ff;
+            padding: 15px 25px;
+            margin: 8px;
+            border-radius: 7px;
+        }
+
+
+        .info-box i {
+            color: #2563eb;
+            margin-right: 8px;
+        }
+
+
+        .info-box strong {
+            color: #1e3a8a;
+        }
+
+
+        .lessons {
+            margin-top: 40px;
+        }
+
+
+        .lessons h2 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+
+        .lesson {
+            background-color: #dbeafe;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+
+        .lesson-number {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+
+        .lesson h3 {
+            margin-top: 8px;
+        }
+
+
+        .lesson h3 a {
+            color: #1e3a8a;
+            text-decoration: none;
+        }
+
+
+        .lesson p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+
+        .lesson-button {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 9px 16px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+        .lesson-button i {
+            margin-right: 6px;
+        }
+
+
+        .empty {
+            color: #555;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background-color: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+        .back i {
+            margin-right: 7px;
+        }
+
+
+        footer {
+            text-align: center;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+
+        footer p {
+            color: white;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+
+            .course {
+                width: 80%;
+                padding: 25px;
+            }
+
+
+            .course h1 {
+                font-size: 28px;
+            }
+
+
+            .info-box {
+                width: 70%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="navbar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            Smart E-Learning
+
+        </div>
+
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="{% url 'course_list' %}">
+                Courses
+            </a>
+
+            <a href="{% url 'tutor_home' %}">
+                AI Tutor
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="course">
+
+
+        <div class="course-icon">
+
+            <i class="fa-solid fa-book-open"></i>
+
+        </div>
+
+
+        <h1>
+            {{ course.title }}
+        </h1>
+
+
+        <p class="course-description">
+            {{ course.description }}
+        </p>
+
+
+
+        <div class="info">
+
+
+            <div class="info-box">
+
+                <i class="fa-solid fa-chalkboard-user"></i>
+
+                <strong>
+                    Instructor:
+                </strong>
+
+                {{ course.instructor }}
+
+            </div>
+
+
+            <div class="info-box">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <strong>
+                    Duration:
+                </strong>
+
+                {{ course.duration }}
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="lessons">
+
+
+            <h2>
+
+                <i class="fa-solid fa-list-check"></i>
+
+                Course Lessons
+
+            </h2>
+
+
+
+            {% for lesson in lessons %}
+
+
+            <div class="lesson">
+
+
+                <div class="lesson-number">
+
+                    Lesson {{ forloop.counter }}
+
+                </div>
+
+
+                <h3>
+
+                    <a href="{% url 'lesson_detail' lesson.id %}">
+
+                        {{ lesson.title }}
+
+                    </a>
+
+                </h3>
+
+
+                <p>
+                    {{ lesson.content }}
+                </p>
+
+
+                <a href="{% url 'lesson_detail' lesson.id %}"
+                   class="lesson-button">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Open Lesson
+
+                </a>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+            <p class="empty">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                No lessons available for this course yet.
+
+            </p>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+        <a href="{% url 'course_list' %}"
+           class="back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Courses
+
+        </a>
+
+
+    </div>
+
+
+
+    <footer>
+
+        
+        <p class="support-title">
+            <i class="fa-solid fa-headset"></i>
+            Smart E-Learning Support Team
+        </p>
+
+        <p>
+            Need help? We are here to assist you.
+        </p>
+
+        <p class="support-email">
+            <i class="fa-solid fa-envelope"></i>
+            support@smartelearning.com
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

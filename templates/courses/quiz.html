@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ quiz.title }} - Smart E-Learning</title>
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+
+        /* QUIZ CONTAINER */
+
+        .quiz-container {
+            width: 70%;
+            margin: 50px auto;
+        }
+
+
+        /* QUIZ HEADER */
+
+        .quiz-header {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+
+        .quiz-icon {
+            font-size: 50px;
+            color: #2563eb;
+        }
+
+
+        .quiz-header h1 {
+            color: #1e3a8a;
+        }
+
+
+        .quiz-info {
+            color: #555;
+            font-size: 15px;
+        }
+
+
+        /* QUESTION */
+
+        .question {
+            background-color: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+
+        .question h3 {
+            color: #1e3a8a;
+        }
+
+
+        /* OPTIONS */
+
+        .option {
+            display: block;
+            padding: 12px;
+            margin: 8px 0;
+            background-color: #f5f7fb;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        .option:hover {
+            background-color: #e8eefc;
+        }
+
+
+        .option input {
+            margin-right: 10px;
+        }
+
+
+        /* SUBMIT BUTTON */
+
+        .submit-button {
+            display: block;
+            margin: 30px auto;
+            padding: 13px 30px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        .submit-button:hover {
+            background-color: #1e3a8a;
+        }
+
+
+        /* RESULT */
+
+        .result {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+
+        .result-icon {
+            font-size: 50px;
+            color: #f59e0b;
+        }
+
+
+        .result h2 {
+            color: #1e3a8a;
+        }
+
+
+        .score {
+            font-size: 24px;
+            color: #2563eb;
+        }
+
+
+        .percentage {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        .passed {
+            color: green;
+        }
+
+
+        .failed {
+            color: red;
+        }
+
+
+        .message {
+            color: #555;
+        }
+
+
+        /* BUTTONS */
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+
+        .retry {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .quiz-container {
+                width: 85%;
+            }
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Smart E-Learning
+        </div>
+
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- QUIZ -->
+
+    <div class="quiz-container">
+
+
+        <!-- QUIZ HEADER -->
+
+        <div class="quiz-header">
+
+            <div class="quiz-icon">
+
+                <i class="fa-solid fa-clipboard-question"></i>
+
+            </div>
+
+
+            <h1>
+                {{ quiz.title }}
+            </h1>
+
+
+            <p class="quiz-info">
+
+                Difficulty:
+                <strong>
+                    {{ quiz.difficulty }}
+                </strong>
+
+                |
+
+                Questions:
+                <strong>
+                    {{ questions|length }}
+                </strong>
+
+            </p>
+
+
+            <p>
+                Answer all questions and submit the quiz.
+            </p>
+
+        </div>
+
+
+
+        <!-- QUIZ FORM -->
+
+        {% if score is None %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            {% for question in questions %}
+
+                <div class="question">
+
+                    <h3>
+
+                        {{ forloop.counter }}.
+                        {{ question.question_text }}
+
+                    </h3>
+
+
+                    <label class="option">
+
+                        <input type="radio"
+                               name="question_{{ question.id }}"
+                               value="1"
+                               required>
+
+                        {{ question.option1 }}
+
+                    </label>
+
+
+                    <label class="option">
+
+                        <input type="radio"
+                               name="question_{{ question.id }}"
+                               value="2">
+
+                        {{ question.option2 }}
+
+                    </label>
+
+
+                    <label class="option">
+
+                        <input type="radio"
+                               name="question_{{ question.id }}"
+                               value="3">
+
+                        {{ question.option3 }}
+
+                    </label>
+
+
+                    <label class="option">
+
+                        <input type="radio"
+                               name="question_{{ question.id }}"
+                               value="4">
+
+                        {{ question.option4 }}
+
+                    </label>
+
+                </div>
+
+            {% endfor %}
+
+
+
+            <button type="submit"
+                    class="submit-button">
+
+                <i class="fa-solid fa-check"></i>
+
+                Submit Quiz
+
+            </button>
+
+        </form>
+
+        {% endif %}
+
+
+
+        <!-- RESULT -->
+
+        {% if score is not None %}
+
+            <div class="result">
+
+                <div class="result-icon">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                </div>
+
+
+                <h2>
+                    Quiz Completed!
+                </h2>
+
+
+                <p class="score">
+
+                    Your Score:
+
+                    <strong>
+                        {{ score }} / {{ questions|length }}
+                    </strong>
+
+                </p>
+
+
+                <p class="percentage">
+
+                    Percentage:
+
+                    <strong>
+                        {{ percentage }}%
+                    </strong>
+
+                </p>
+
+
+                {% if percentage >= 40 %}
+
+                    <p class="passed">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Passed! Congratulations 🎉
+
+                    </p>
+
+
+                {% else %}
+
+                    <p class="failed">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Keep practicing and try again!
+
+                    </p>
+
+                {% endif %}
+
+
+                {% if score == questions|length %}
+
+                    <p class="message">
+
+                        Excellent! You answered every question correctly. 🌟
+
+                    </p>
+
+                {% elif score > 0 %}
+
+                    <p class="message">
+
+                        Good job! Keep practicing to improve your score.
+
+                    </p>
+
+                {% else %}
+
+                    <p class="message">
+
+                        Don't worry. Keep learning and try again!
+
+                    </p>
+
+                {% endif %}
+
+
+                <a href="{% url 'quiz' quiz.id %}"
+                   class="retry">
+
+                    <i class="fa-solid fa-rotate-right"></i>
+
+                    Try Again
+
+                </a>
+
+
+                <a href="{% url 'dashboard' %}"
+                   class="back">
+
+                    Back to Dashboard
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Smart E-Learning | Major Project
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

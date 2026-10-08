@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Dashboard</title>
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+
+        .header {
+            background-color: #4f46e5;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+
+        .card {
+            background-color: white;
+            width: 220px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+
+        .card h2 {
+            color: #4f46e5;
+            font-size: 32px;
+            margin: 10px;
+        }
+
+
+        .card p {
+            color: #555;
+            font-size: 16px;
+        }
+
+
+        .management {
+            background-color: white;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+
+        .management h2 {
+            color: #4f46e5;
+            margin-top: 0;
+        }
+
+
+        .management p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+
+        .manage-button {
+            text-decoration: none;
+            background-color: #198754;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 5px;
+        }
+
+
+        .quiz-button {
+            background-color: #0d6efd;
+        }
+
+
+        .ai-button {
+            background-color: #6f42c1;
+        }
+
+
+        .manage-button:hover {
+            opacity: 0.9;
+        }
+
+
+        .section {
+            background-color: white;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+
+        .section h2 {
+            color: #4f46e5;
+            margin-bottom: 20px;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+
+        th {
+            background-color: #4f46e5;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+
+        .ai {
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+
+        .details {
+            text-decoration: none;
+            background-color: #4f46e5;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+
+        .back {
+            text-align: center;
+            margin: 30px;
+        }
+
+
+        .back a {
+            text-decoration: none;
+            background-color: #4f46e5;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+        }
+
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 15px;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 95%;
+            }
+
+            .section {
+                padding: 15px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 600px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            Staff Dashboard 👨‍🏫
+        </h1>
+
+        <p>
+            Smart E-Learning Management System
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <!-- DASHBOARD CARDS -->
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h2>
+                    {{ total_students }}
+                </h2>
+
+                <p>
+                    Total Students
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    {{ total_courses }}
+                </h2>
+
+                <p>
+                    Total Courses
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    {{ total_lessons }}
+                </h2>
+
+                <p>
+                    Total Lessons
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    {{ total_quizzes }}
+                </h2>
+
+                <p>
+                    Total Quizzes
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    {{ ai_quizzes }}
+                </h2>
+
+                <p>
+                    AI Generated Quizzes
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    {{ total_quiz_attempts }}
+                </h2>
+
+                <p>
+                    Total Quiz Attempts
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    {{ average_score }}%
+                </h2>
+
+                <p>
+                    Average Quiz Score
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- COURSE MANAGEMENT -->
+
+        <div class="management">
+
+            <h2>
+                ⚙️ Course Management
+            </h2>
+
+            <p>
+                Add, edit or delete courses and manage their lessons.
+            </p>
+
+
+            <a
+                class="manage-button"
+                href="{% url 'manage_courses' %}"
+            >
+                Manage Courses & Lessons
+            </a>
+
+        </div>
+
+
+        <!-- QUIZ MANAGEMENT -->
+
+        <div class="management">
+
+            <h2>
+                📝 Quiz Management
+            </h2>
+
+            <p>
+                Create, edit, delete and manage quiz questions.
+            </p>
+
+
+            <a
+                class="manage-button quiz-button"
+                href="{% url 'quiz_list' %}"
+            >
+                Manage Quizzes
+            </a>
+
+
+            <a
+                class="manage-button ai-button"
+                href="{% url 'generate_ai_quiz' %}"
+            >
+                🤖 Generate AI Quiz
+            </a>
+
+        </div>
+
+
+        <!-- REGISTERED STUDENTS -->
+
+        <div class="section">
+
+            <h2>
+                👨‍🎓 Registered Students
+            </h2>
+
+
+            {% if students %}
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        Username
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Date Joined
+                    </th>
+
+                    <th>
+                        Details
+                    </th>
+
+                </tr>
+
+
+                {% for student in students %}
+
+                <tr>
+
+                    <td>
+                        {{ student.username }}
+                    </td>
+
+                    <td>
+                        {{ student.email }}
+                    </td>
+
+                    <td>
+                        {{ student.date_joined|date:"d M Y" }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            class="details"
+                            href="{% url 'student_detail' student.id %}"
+                        >
+                            View Details
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+            {% else %}
+
+            <div class="empty">
+
+                No students registered yet.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ALL COURSES -->
+
+        <div class="section">
+
+            <h2>
+                📚 All Courses
+            </h2>
+
+
+            {% if courses %}
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        Course Name
+                    </th>
+
+                    <th>
+                        Instructor
+                    </th>
+
+                    <th>
+                        Duration
+                    </th>
+
+                    <th>
+                        Difficulty
+                    </th>
+
+                </tr>
+
+
+                {% for course in courses %}
+
+                <tr>
+
+                    <td>
+                        {{ course.title }}
+                    </td>
+
+                    <td>
+                        {{ course.instructor }}
+                    </td>
+
+                    <td>
+                        {{ course.duration }}
+                    </td>
+
+                    <td>
+                        {{ course.difficulty }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+            {% else %}
+
+            <div class="empty">
+
+                No courses available.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ALL LESSONS -->
+
+        <div class="section">
+
+            <h2>
+                📖 All Lessons
+            </h2>
+
+
+            {% if lessons %}
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        Lesson Name
+                    </th>
+
+                    <th>
+                        Course
+                    </th>
+
+                </tr>
+
+
+                {% for lesson in lessons %}
+
+                <tr>
+
+                    <td>
+                        {{ lesson.title }}
+                    </td>
+
+                    <td>
+                        {{ lesson.course.title }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+            {% else %}
+
+            <div class="empty">
+
+                No lessons available.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ALL QUIZZES -->
+
+        <div class="section">
+
+            <h2>
+                📝 All Quizzes
+            </h2>
+
+
+            {% if quizzes %}
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        Quiz Name
+                    </th>
+
+                    <th>
+                        Lesson
+                    </th>
+
+                    <th>
+                        Difficulty
+                    </th>
+
+                    <th>
+                        Type
+                    </th>
+
+                </tr>
+
+
+                {% for quiz in quizzes %}
+
+                <tr>
+
+                    <td>
+                        {{ quiz.title }}
+                    </td>
+
+                    <td>
+                        {{ quiz.lesson.title }}
+                    </td>
+
+                    <td>
+                        {{ quiz.difficulty }}
+                    </td>
+
+                    <td>
+
+                        {% if quiz.is_ai_generated %}
+
+                        <span class="ai">
+                            AI Generated
+                        </span>
+
+                        {% else %}
+
+                        Normal Quiz
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+            {% else %}
+
+            <div class="empty">
+
+                No quizzes available.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- STUDENT QUIZ ATTEMPTS -->
+
+        <div class="section">
+
+            <h2>
+                🎯 Student Quiz Attempts
+            </h2>
+
+
+            {% if quiz_attempts %}
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <th>
+                        Quiz
+                    </th>
+
+                    <th>
+                        Score
+                    </th>
+
+                    <th>
+                        Total Questions
+                    </th>
+
+                    <th>
+                        Percentage
+                    </th>
+
+                    <th>
+                        Attempted At
+                    </th>
+
+                </tr>
+
+
+                {% for result in quiz_attempts %}
+
+                <tr>
+
+                    <td>
+                        {{ result.user.username }}
+                    </td>
+
+                    <td>
+                        {{ result.quiz.title }}
+                    </td>
+
+                    <td>
+                        {{ result.score }}
+                    </td>
+
+                    <td>
+                        {{ result.total_questions }}
+                    </td>
+
+                    <td>
+
+                        {% if result.total_questions > 0 %}
+
+                        {% widthratio result.score result.total_questions 100 %}%
+
+                        {% else %}
+
+                        0%
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ result.attempted_at|date:"d M Y, h:i A" }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+            {% else %}
+
+            <div class="empty">
+
+                No quiz attempts yet.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ADMIN PANEL -->
+
+        <div class="back">
+
+            <a href="/admin/">
+                Go to Admin Panel
+            </a>
+
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

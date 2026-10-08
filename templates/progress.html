@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Progress - Smart E-Learning</title>
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 80%;
+            margin: 45px auto;
+            text-align: center;
+        }
+
+
+        .main-icon {
+            font-size: 50px;
+            color: #2563eb;
+        }
+
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+
+        .intro {
+            color: #666;
+        }
+
+
+        /* LESSON PROGRESS */
+
+        .progress-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+
+        .progress-card h2 {
+            color: #1e3a8a;
+        }
+
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+
+        .stat-box {
+            width: 180px;
+            background-color: #eff6ff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+
+        .stat-box i {
+            font-size: 30px;
+            color: #2563eb;
+        }
+
+
+        .stat-box h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+
+        .stat-box p {
+            color: #555;
+        }
+
+
+        /* PROGRESS BAR */
+
+        .progress-bar {
+            width: 90%;
+            height: 25px;
+            background-color: #ddd;
+            margin: 30px auto 10px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+            height: 25px;
+            background-color: #2563eb;
+            width: {{ progress_percentage }}%;
+        }
+
+
+        .percentage {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+
+        /* ANALYTICS */
+
+        .analytics {
+            background-color: white;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+
+        .analytics h2 {
+            color: #1e3a8a;
+        }
+
+
+        .analytics-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+
+        .analytics-card {
+            width: 190px;
+            background-color: #f8fafc;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+
+        .analytics-card i {
+            font-size: 32px;
+            color: #7c3aed;
+        }
+
+
+        .analytics-card h3 {
+            color: #1e3a8a;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+
+        .analytics-card p {
+            color: #555;
+        }
+
+
+        /* PERFORMANCE */
+
+        .performance-level {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #eff6ff;
+            border-radius: 8px;
+        }
+
+
+        .performance-level h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+
+        .performance-level p {
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+        /* COMPLETED LESSONS */
+
+        .completed,
+        .quiz-section {
+            background-color: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+
+        .completed h2,
+        .quiz-section h2 {
+            color: #1e3a8a;
+        }
+
+
+        .lesson {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        .lesson i {
+            color: #16a34a;
+            margin-right: 10px;
+        }
+
+
+        /* QUIZ RESULT */
+
+        .quiz-result {
+            background-color: #eff6ff;
+            padding: 15px;
+            margin-top: 12px;
+            border-radius: 7px;
+        }
+
+
+        .quiz-result i {
+            color: #7c3aed;
+            margin-right: 8px;
+        }
+
+
+        .quiz-name {
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+
+        .score {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+
+        .quiz-percentage {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+
+        .no-result {
+            color: #666;
+        }
+
+
+        /* BACK BUTTON */
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+
+        footer p {
+            color: white;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .container {
+                width: 90%;
+            }
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+            .stat-box,
+            .analytics-card {
+                width: 70%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            Smart E-Learning
+
+        </div>
+
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+
+            <a href="{% url 'tutor_home' %}">
+                AI Tutor
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="container">
+
+
+        <div class="main-icon">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+        </div>
+
+
+        <h1>
+            My Learning Progress
+        </h1>
+
+
+        <p class="intro">
+            Track your learning progress and analyze your performance.
+        </p>
+
+
+
+        <!-- LESSON PROGRESS -->
+
+        <div class="progress-card">
+
+
+            <h2>
+
+                <i class="fa-solid fa-book"></i>
+
+                Lesson Progress
+
+            </h2>
+
+
+            <div class="stats">
+
+
+                <div class="stat-box">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <h2>
+                        {{ total_lessons }}
+                    </h2>
+
+                    <p>
+                        Total Lessons
+                    </p>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <h2>
+                        {{ completed_lessons }}
+                    </h2>
+
+                    <p>
+                        Completed
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <h3>
+                Overall Progress
+            </h3>
+
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+
+            <p class="percentage">
+
+                {{ progress_percentage }}% Complete
+
+            </p>
+
+        </div>
+
+
+
+        <!-- PERFORMANCE ANALYTICS -->
+
+        <div class="analytics">
+
+
+            <h2>
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                Performance Analytics
+
+            </h2>
+
+
+            <div class="analytics-cards">
+
+
+                <div class="analytics-card">
+
+                    <i class="fa-solid fa-clipboard-check"></i>
+
+                    <h3>
+                        {{ total_quiz_attempts }}
+                    </h3>
+
+                    <p>
+                        Quiz Attempts
+                    </p>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h3>
+                        {{ average_score }}%
+                    </h3>
+
+                    <p>
+                        Average Score
+                    </p>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                    <h3>
+                        {{ best_score }}%
+                    </h3>
+
+                    <p>
+                        Best Score
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PERFORMANCE LEVEL -->
+
+            <div class="performance-level">
+
+
+                <h3>
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    Current Performance Level
+
+                </h3>
+
+
+                <p>
+                    {{ performance_level }}
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COMPLETED LESSONS -->
+
+        <div class="completed">
+
+
+            <h2>
+
+                <i class="fa-solid fa-check-double"></i>
+
+                Completed Lessons
+
+            </h2>
+
+
+            {% if completed_progress %}
+
+
+                {% for item in completed_progress %}
+
+
+                    <div class="lesson">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        {{ item.lesson.title }}
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <p>
+                    You have not completed any lessons yet.
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- QUIZ PERFORMANCE -->
+
+        <div class="quiz-section">
+
+
+            <h2>
+
+                <i class="fa-solid fa-clipboard-question"></i>
+
+                Quiz Performance History
+
+            </h2>
+
+
+
+            {% if quiz_results %}
+
+
+                {% for result in quiz_results %}
+
+
+                    <div class="quiz-result">
+
+
+                        <p>
+
+                            <i class="fa-solid fa-file-circle-check"></i>
+
+
+                            <span class="quiz-name">
+
+                                {{ result.quiz.title }}
+
+                            </span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            Score:
+
+                            <span class="score">
+
+                                {{ result.score }}
+
+                                /
+
+                                {{ result.total_questions }}
+
+                            </span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            Percentage:
+
+                            <span class="quiz-percentage">
+
+                                {% if result.total_questions > 0 %}
+
+                                    {% widthratio result.score result.total_questions 100 %}%
+
+                                {% else %}
+
+                                    0%
+
+                                {% endif %}
+
+                            </span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            Attempted:
+
+                            {{ result.attempted_at|date:"d M Y, h:i A" }}
+
+                        </p>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <p class="no-result">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    You have not attempted any quiz yet.
+
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- BACK -->
+
+        <a href="{% url 'dashboard' %}"
+           class="back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Dashboard
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        
+        <p class="support-title">
+            <i class="fa-solid fa-headset"></i>
+            Smart E-Learning Support Team
+        </p>
+
+        <p>
+            Need help? We are here to assist you.
+        </p>
+
+        <p class="support-email">
+            <i class="fa-solid fa-envelope"></i>
+            support@smartelearning.com
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

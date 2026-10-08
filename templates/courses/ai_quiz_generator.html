@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Quiz Generator</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f8fc;
+        }
+
+        nav {
+            background-color: #2563eb;
+            padding: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 70%;
+            margin: 40px auto;
+        }
+
+        .box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+        .lesson-name {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 7px;
+            margin-top: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 7px;
+            margin-top: 20px;
+        }
+
+        .info {
+            background-color: #eff6ff;
+            padding: 15px;
+            border-radius: 7px;
+            margin-top: 20px;
+            color: #1e40af;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <a href="/">Home</a>
+
+    <a href="/courses/">Courses</a>
+
+    <a href="/tutor/">AI Tutor</a>
+
+    <a href="/dashboard/">Dashboard</a>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="box">
+
+        <h1>🤖 AI Quiz Generator</h1>
+
+        <div class="lesson-name">
+
+            Generate an AI-powered quiz for:
+
+            <strong>{{ lesson.title }}</strong>
+
+        </div>
+
+
+        <div class="info">
+
+            AI will create questions based on the lesson
+            content and selected difficulty level.
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <label>
+                🎯 Select Difficulty
+            </label>
+
+            <select name="difficulty">
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+
+
+            <label>
+                📝 Number of Questions
+            </label>
+
+            <input
+                type="number"
+                name="question_count"
+                value="5"
+                min="1"
+                max="10"
+                required
+            >
+
+
+            <button type="submit">
+
+                🚀 Generate AI Quiz
+
+            </button>
+
+        </form>
+
+
+        {% if error %}
+
+        <div class="error">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <a
+            href="{% url 'lesson_detail' lesson.id %}"
+            class="back"
+        >
+
+            ← Back to Lesson
+
+        </a>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

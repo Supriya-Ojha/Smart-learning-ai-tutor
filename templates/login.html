@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Smart E-Learning</title>
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #dbeafe;
+        }
+
+
+        .container {
+            width: 400px;
+            margin: 80px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 5px;
+        }
+
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+        .password-box {
+            position: relative;
+        }
+
+
+        .password-box input {
+            padding-right: 40px;
+        }
+
+
+        .eye {
+            position: absolute;
+            right: 10px;
+            top: 11px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #555;
+        }
+
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+
+        .message {
+            text-align: center;
+            color: red;
+        }
+
+
+        .register {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        .register a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <h1>
+            Login
+        </h1>
+
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <p class="message">
+                    {{ message }}
+                </p>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <label>
+                Username
+            </label>
+
+
+            <input
+                type="text"
+                name="username"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                >
+
+
+                <span
+                    class="eye"
+                    onclick="togglePassword()"
+                    id="eye">
+
+                    &#128065;
+
+                </span>
+
+            </div>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="register">
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+                Register
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        function togglePassword() {
+
+            let password =
+                document.getElementById("password");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+            }
+
+            else {
+
+                password.type = "password";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

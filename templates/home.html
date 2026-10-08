@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart E-Learning</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            width: 85%;
+            margin: 55px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        .hero-left {
+            width: 55%;
+        }
+
+
+        .hero-left h1 {
+            font-size: 48px;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+
+        .hero-left h1 span {
+            color: #2563eb;
+        }
+
+
+        .hero-left p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+
+        .button {
+            display: inline-block;
+            padding: 14px 24px;
+            margin-right: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+
+        .courses-button {
+            background-color: #2563eb;
+            color: white;
+        }
+
+
+        .tutor-button {
+            background-color: white;
+            color: #1e3a8a;
+            border: 1px solid #1e3a8a;
+        }
+
+
+        .button i {
+            margin-right: 7px;
+        }
+
+
+        /* HERO RIGHT */
+
+        .hero-right {
+            width: 35%;
+            min-width: 280px;
+            background-color: #dbeafe;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+
+        .hero-icon {
+            width: 110px;
+            height: 110px;
+            background-color: white;
+            border-radius: 50%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .hero-icon i {
+            font-size: 55px;
+            color: #2563eb;
+        }
+
+
+        .hero-right h2 {
+            color: #1e3a8a;
+            margin-top: 25px;
+        }
+
+
+        .hero-right p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+
+        /* AI TUTOR SECTION */
+
+        .ai-section {
+            width: 80%;
+            margin: 55px auto;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 45px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        .ai-text {
+            width: 65%;
+        }
+
+
+        .ai-text h2 {
+            font-size: 30px;
+            margin-top: 0;
+        }
+
+
+        .ai-text p {
+            line-height: 1.7;
+            color: #e5e7eb;
+        }
+
+
+        .ai-button {
+            background-color: white;
+            color: #1e3a8a;
+            padding: 14px 22px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+
+        .ai-button i {
+            margin-right: 7px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            background-color: #172554;
+            color: white;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+
+        footer p {
+            color: white;
+            margin: 8px;
+        }
+
+
+        .support-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        .support-email {
+            font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+
+            .navbar a {
+                margin-left: 10px;
+            }
+
+
+            .hero {
+                width: 90%;
+                text-align: center;
+            }
+
+
+            .hero-left {
+                width: 100%;
+            }
+
+
+            .hero-left h1 {
+                font-size: 36px;
+            }
+
+
+            .hero-left p {
+                font-size: 16px;
+            }
+
+
+            .hero-right {
+                width: 100%;
+                margin-top: 35px;
+            }
+
+
+            .button {
+                margin: 5px;
+            }
+
+
+            .ai-section {
+                width: 75%;
+                padding: 30px;
+                text-align: center;
+            }
+
+
+            .ai-text {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            Smart E-Learning
+
+        </div>
+
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+
+            <a href="{% url 'register' %}">
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+
+        <div class="hero-left">
+
+
+            <h1>
+
+                Learn Smarter.<br>
+
+                Learn <span>Better.</span>
+
+            </h1>
+
+
+            <p>
+
+                Welcome to Smart E-Learning, a modern learning platform
+                designed to help you learn through online courses,
+                quizzes and AI-powered assistance.
+
+            </p>
+
+
+            <div class="buttons">
+
+
+                <a href="{% url 'course_list' %}"
+                   class="button courses-button">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Explore Courses
+
+                </a>
+
+
+                <a href="{% url 'tutor_home' %}"
+                   class="button tutor-button">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    Ask AI Tutor
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="hero-right">
+
+
+            <div class="hero-icon">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+            </div>
+
+
+            <h2>
+
+                Your Learning Journey
+
+            </h2>
+
+
+            <p>
+
+                Learn new skills, practice with quizzes
+                and get help whenever you need it.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- AI TUTOR SECTION -->
+
+    <section class="ai-section">
+
+
+        <div class="ai-text">
+
+
+            <h2>
+
+                <i class="fa-solid fa-robot"></i>
+
+                Meet Your AI Tutor
+
+            </h2>
+
+
+            <p>
+
+                Stuck on a topic? Need an explanation?
+                Your AI Tutor is always ready to help you
+                understand difficult concepts and continue learning.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div>
+
+
+            <a href="{% url 'tutor_home' %}"
+               class="ai-button">
+
+
+                <i class="fa-solid fa-comments"></i>
+
+                Start Learning with AI
+
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+
+        <p class="support-title">
+
+
+            <i class="fa-solid fa-headset"></i>
+
+            Smart E-Learning Support Team
+
+
+        </p>
+
+
+        <p>
+
+            Need help? We are here to assist you.
+
+        </p>
+
+
+        <p class="support-email">
+
+
+            <i class="fa-solid fa-envelope"></i>
+
+            support@smartelearning.com
+
+
+        </p>
+
+
+    </footer>
+
+
+</body>
+
+</html>

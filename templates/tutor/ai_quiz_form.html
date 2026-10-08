@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Generate AI Quiz</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 70px auto;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .intro {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        .hint {
+            color: #777;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .generate-btn {
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .generate-btn:hover {
+            background-color: #59359a;
+        }
+
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            margin-left: 8px;
+        }
+
+        .cancel-btn:hover {
+            background-color: #5c636a;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>
+            🤖 Generate AI Quiz
+        </h1>
+
+
+        <p class="intro">
+
+            Enter a topic and choose the number of questions.
+            AI will automatically create a multiple-choice quiz
+            and save it in your quiz management section.
+
+        </p>
+
+
+        {% if error %}
+
+            <div class="error">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- TOPIC -->
+
+            <label for="topic">
+                Quiz Topic
+            </label>
+
+            <input
+                type="text"
+                id="topic"
+                name="topic"
+                placeholder="Example: Python, DBMS, Artificial Intelligence"
+                required
+            >
+
+            <p class="hint">
+                Enter the subject or topic for which you want to
+                generate questions.
+            </p>
+
+
+            <!-- NUMBER OF QUESTIONS -->
+
+            <label for="number_of_questions">
+                Number of Questions
+            </label>
+
+            <input
+                type="number"
+                id="number_of_questions"
+                name="number_of_questions"
+                value="5"
+                min="1"
+                max="20"
+                required
+            >
+
+            <p class="hint">
+                You can generate between 1 and 20 questions.
+            </p>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="generate-btn"
+                >
+                    🤖 Generate AI Quiz
+                </button>
+
+
+                <a
+                    href="{% url 'quiz_list' %}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

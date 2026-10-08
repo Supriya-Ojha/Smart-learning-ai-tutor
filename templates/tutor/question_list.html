@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Questions</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .top-section {
+            background-color: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .description {
+            color: #666;
+        }
+
+        .ai {
+            color: #6f42c1;
+            font-weight: bold;
+        }
+
+        .normal {
+            color: #0d6efd;
+            font-weight: bold;
+        }
+
+        .add-btn {
+            display: inline-block;
+            background-color: #198754;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .add-btn:hover {
+            background-color: #146c43;
+        }
+
+        .question-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .question-number {
+            color: #0d6efd;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .correct {
+            color: #198754;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            margin-right: 5px;
+            text-decoration: none;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .edit {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .delete {
+            background-color: #dc3545;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 15px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .empty {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- QUIZ INFORMATION -->
+
+    <div class="top-section">
+
+        <h1>
+            {{ quiz.title }}
+        </h1>
+
+
+        {% if quiz.description %}
+
+            <p class="description">
+                {{ quiz.description }}
+            </p>
+
+        {% else %}
+
+            <p class="description">
+                No description available.
+            </p>
+
+        {% endif %}
+
+
+        {% if quiz.is_ai_generated %}
+
+            <p class="ai">
+                AI Generated Quiz
+            </p>
+
+        {% else %}
+
+            <p class="normal">
+                Normal Quiz
+            </p>
+
+        {% endif %}
+
+
+        <a
+            href="{% url 'add_question' quiz.id %}"
+            class="add-btn"
+        >
+            + Add Question
+        </a>
+
+    </div>
+
+
+    <!-- QUESTIONS -->
+
+    {% if questions %}
+
+        {% for question in questions %}
+
+            <div class="question-card">
+
+
+                <div class="question-number">
+
+                    Question {{ forloop.counter }}
+
+                </div>
+
+
+                <div class="question-text">
+
+                    {{ question.question_text }}
+
+                </div>
+
+
+                <div class="options">
+
+                    <div>
+                        <strong>A.</strong>
+                        {{ question.option_a }}
+                    </div>
+
+                    <div>
+                        <strong>B.</strong>
+                        {{ question.option_b }}
+                    </div>
+
+                    <div>
+                        <strong>C.</strong>
+                        {{ question.option_c }}
+                    </div>
+
+                    <div>
+                        <strong>D.</strong>
+                        {{ question.option_d }}
+                    </div>
+
+                </div>
+
+
+                <div class="correct">
+
+                    Correct Answer:
+                    {{ question.correct_answer }}
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <a
+                        href="{% url 'edit_question' question.id %}"
+                        class="btn edit"
+                    >
+                        Edit
+                    </a>
+
+
+                    <a
+                        href="{% url 'delete_question' question.id %}"
+                        class="btn delete"
+                    >
+                        Delete
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+        <div class="empty">
+
+            <h2>No Questions Yet</h2>
+
+            <p>
+                This quiz does not have any questions yet.
+            </p>
+
+            <a
+                href="{% url 'add_question' quiz.id %}"
+                class="add-btn"
+            >
+                Add First Question
+            </a>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- BACK -->
+
+    <a
+        href="{% url 'quiz_list' %}"
+        class="back"
+    >
+        ← Back to Quizzes
+    </a>
+
+
+</div>
+
+</body>
+
+</html>

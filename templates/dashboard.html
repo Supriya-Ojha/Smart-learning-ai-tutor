@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Smart E-Learning</title>
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+
+        /* DASHBOARD */
+
+        .dashboard {
+            width: 85%;
+            margin: 45px auto;
+            text-align: center;
+        }
+
+
+        .dashboard h1 {
+            color: #1e3a8a;
+        }
+
+
+        .dashboard > p {
+            color: #666;
+        }
+
+
+        /* WELCOME ICON */
+
+        .welcome-icon {
+            font-size: 50px;
+            color: #2563eb;
+        }
+
+
+        /* CARDS */
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        .card {
+            width: 200px;
+            background-color: white;
+            padding: 22px;
+            margin: 8px;
+            border-radius: 10px;
+        }
+
+
+        .card i {
+            font-size: 40px;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+
+        .card h3 {
+            color: #1e3a8a;
+        }
+
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+
+        /* SMART RECOMMENDATION */
+
+        .recommendation {
+            background-color: white;
+            width: 75%;
+            margin: 40px auto 0;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: left;
+            border-left: 6px solid #7c3aed;
+        }
+
+
+        .recommendation h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+
+        .recommendation h3 {
+            color: #7c3aed;
+        }
+
+
+        .recommendation p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+
+        .recommendation-icon {
+            font-size: 35px;
+            color: #7c3aed;
+            margin-bottom: 10px;
+        }
+
+
+        .lesson-button {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+
+        .lesson-button i {
+            margin-right: 7px;
+        }
+
+
+        /* PERFORMANCE */
+
+        .performance {
+            background-color: white;
+            width: 75%;
+            margin: 25px auto 0;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+
+        .performance h2 {
+            color: #1e3a8a;
+        }
+
+
+        .performance-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+
+        .performance-card {
+            width: 180px;
+            background-color: #eff6ff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+
+        .performance-card i {
+            font-size: 30px;
+            color: #2563eb;
+        }
+
+
+        .performance-card h3 {
+            color: #1e3a8a;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+
+        .performance-card p {
+            color: #555;
+        }
+
+
+        /* PROGRESS BUTTON */
+
+        .progress-button {
+            display: inline-block;
+            background-color: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+
+        .progress-button i {
+            margin-right: 7px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+
+        footer p {
+            color: white;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .dashboard {
+                width: 90%;
+            }
+
+
+            .card {
+                width: 70%;
+            }
+
+
+            .performance-card {
+                width: 70%;
+            }
+
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+
+            .recommendation,
+            .performance {
+                width: 85%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            Smart E-Learning
+
+        </div>
+
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- DASHBOARD -->
+
+    <div class="dashboard">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome-icon">
+
+            <i class="fa-solid fa-user-graduate"></i>
+
+        </div>
+
+
+        <h1>
+
+            Welcome, {{ request.user.username }}!
+
+        </h1>
+
+
+        <p>
+
+            Welcome to your Smart E-Learning Dashboard.
+
+        </p>
+
+
+
+        <!-- MAIN CARDS -->
+
+        <div class="cards">
+
+
+            <!-- COURSES -->
+
+            <a href="{% url 'course_list' %}"
+               class="card-link">
+
+                <div class="card">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <h3>
+                        Courses
+                    </h3>
+
+                    <p>
+                        Explore courses and start learning.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- AI TUTOR -->
+
+            <a href="{% url 'tutor_home' %}"
+               class="card-link">
+
+                <div class="card">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <h3>
+                        AI Tutor
+                    </h3>
+
+                    <p>
+                        Ask questions and learn with AI.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- MY PROGRESS -->
+
+            <a href="{% url 'my_progress' %}"
+               class="card-link">
+
+                <div class="card">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h3>
+                        My Progress
+                    </h3>
+
+                    <p>
+                        Track your learning progress.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- MY PROFILE -->
+
+            <a href="{% url 'my_profile' %}"
+               class="card-link">
+
+                <div class="card">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        View your profile information.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- SMART RECOMMENDATION -->
+
+        <div class="recommendation">
+
+
+            <div class="recommendation-icon">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+            </div>
+
+
+            <h2>
+
+                Smart Learning Recommendation
+
+            </h2>
+
+
+            <h3>
+
+                {{ recommendation_title }}
+
+            </h3>
+
+
+            <p>
+
+                {{ recommendation_message }}
+
+            </p>
+
+
+            {% if recommended_lesson %}
+
+                <a href="{% url 'lesson_detail' recommended_lesson.id %}"
+                   class="lesson-button">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Start Recommended Lesson
+
+                </a>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- PERFORMANCE -->
+
+        <div class="performance">
+
+
+            <h2>
+
+                <i class="fa-solid fa-chart-simple"></i>
+
+                Learning Performance
+
+            </h2>
+
+
+
+            <div class="performance-cards">
+
+
+                <!-- LESSONS -->
+
+                <div class="performance-card">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <h3>
+
+                        {{ completed_lessons }}
+
+                        /
+
+                        {{ total_lessons }}
+
+                    </h3>
+
+                    <p>
+                        Lessons Completed
+                    </p>
+
+                </div>
+
+
+
+                <!-- PROGRESS -->
+
+                <div class="performance-card">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h3>
+
+                        {{ progress_percentage }}%
+
+                    </h3>
+
+                    <p>
+                        Overall Progress
+                    </p>
+
+                </div>
+
+
+
+                <!-- QUIZ ATTEMPTS -->
+
+                <div class="performance-card">
+
+                    <i class="fa-solid fa-clipboard-check"></i>
+
+                    <h3>
+
+                        {{ total_quiz_attempts }}
+
+                    </h3>
+
+                    <p>
+                        Quiz Attempts
+                    </p>
+
+                </div>
+
+
+
+                <!-- AVERAGE SCORE -->
+
+                <div class="performance-card">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                    <h3>
+
+                        {{ average_score }}%
+
+                    </h3>
+
+                    <p>
+                        Average Quiz Score
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <a href="{% url 'my_progress' %}"
+               class="progress-button">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                View Detailed Progress
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+       
+        <p class="support-title">
+            <i class="fa-solid fa-headset"></i>
+            Smart E-Learning Support Team
+        </p>
+
+        <p>
+            Need help? We are here to assist you.
+        </p>
+
+        <p class="support-email">
+            <i class="fa-solid fa-envelope"></i>
+            support@smartelearning.com
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Courses</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .header {
+            background-color: #4f46e5;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .top {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            text-decoration: none;
+            background-color: #4f46e5;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .course {
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .course h2 {
+            color: #4f46e5;
+            margin-top: 0;
+        }
+
+        .course p {
+            line-height: 1.6;
+        }
+
+        .info {
+            color: #666;
+        }
+
+        .actions {
+            margin-top: 15px;
+        }
+
+        .actions a,
+        .actions button {
+            text-decoration: none;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 5px;
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .manage {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        .edit {
+            background-color: #198754;
+            color: white;
+        }
+
+        .delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .back {
+            text-align: center;
+            margin: 30px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: #4f46e5;
+        }
+
+        .empty {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📚 Manage Courses</h1>
+        <p>Smart E-Learning Management System</p>
+    </div>
+
+    <div class="container">
+
+        <div class="top">
+            <a class="button" href="{% url 'add_course' %}">
+                + Add Course
+            </a>
+        </div>
+
+        {% if courses %}
+
+            {% for course in courses %}
+
+            <div class="course">
+
+                <h2>{{ course.title }}</h2>
+
+                <p>{{ course.description }}</p>
+
+                <p class="info">
+                    Instructor: {{ course.instructor }}
+                    <br>
+                    Duration: {{ course.duration }}
+                    <br>
+                    Difficulty: {{ course.difficulty }}
+                </p>
+
+                <div class="actions">
+
+                    <a class="manage" href="{% url 'manage_lessons' course.id %}">
+                        Manage Lessons
+                    </a>
+
+                    <a class="edit" href="{% url 'edit_course' course.id %}">
+                        Edit Course
+                    </a>
+
+                    <form method="POST" action="{% url 'delete_course' course.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button class="delete" type="submit" onclick="return confirm('Are you sure you want to delete this course?');">
+                            Delete Course
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                No courses available.
+            </div>
+
+        {% endif %}
+
+        <div class="back">
+            <a href="{% url 'staff_dashboard' %}">
+                ← Back to Staff Dashboard
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

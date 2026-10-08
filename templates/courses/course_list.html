@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Courses - Smart E-Learning</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+
+        .navbar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+
+        .container {
+            width: 90%;
+            margin: 40px auto;
+        }
+
+
+        .heading {
+            text-align: center;
+        }
+
+
+        .heading i {
+            font-size: 45px;
+            color: #2563eb;
+        }
+
+
+        .heading h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+
+        .heading p {
+            color: #666;
+        }
+
+
+        /* SEARCH AREA */
+
+        .search-section {
+            background-color: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+
+        .search-box {
+            width: 55%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+
+        .search-button {
+            padding: 13px 22px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+
+        .search-button i {
+            margin-right: 5px;
+        }
+
+
+        /* FILTER */
+
+        .filter-area {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        .filter-area label {
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-right: 10px;
+        }
+
+
+        .filter-area select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+
+        .filter-button {
+            padding: 10px 18px;
+            margin-left: 8px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1e3a8a;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        .clear-button {
+            padding: 10px 18px;
+            margin-left: 8px;
+            border-radius: 5px;
+            background-color: #e5e7eb;
+            color: #333;
+            text-decoration: none;
+        }
+
+
+        /* COURSE CARDS */
+
+        .courses {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 35px;
+        }
+
+
+        .course-card {
+            background-color: white;
+            width: 280px;
+            margin: 15px;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .course-icon {
+            font-size: 45px;
+            color: #2563eb;
+        }
+
+
+        .course-card h2 {
+            color: #1e3a8a;
+            font-size: 21px;
+        }
+
+
+        .course-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+
+        .course-info {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+
+        .course-info p {
+            margin: 8px 0;
+            color: #444;
+        }
+
+
+        .course-info i {
+            color: #2563eb;
+            width: 20px;
+        }
+
+
+        /* DIFFICULTY */
+
+        .difficulty {
+            display: inline-block;
+            padding: 7px 12px;
+            margin-top: 10px;
+            border-radius: 15px;
+            background-color: #eff6ff;
+            color: #1e3a8a;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+        /* VIEW COURSE BUTTON */
+
+        .view-button {
+            display: block;
+            margin-top: auto;
+            padding: 11px 20px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+
+        .view-button i {
+            margin-right: 5px;
+        }
+
+
+        /* NO RESULTS */
+
+        .no-results {
+            background-color: white;
+            width: 80%;
+            margin: 30px auto;
+            padding: 35px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+
+        .no-results i {
+            font-size: 45px;
+            color: #999;
+        }
+
+
+        .no-results h2 {
+            color: #1e3a8a;
+        }
+
+
+        .no-results p {
+            color: #666;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+
+        footer p {
+            color: white;
+            margin: 7px;
+        }
+
+
+        .support-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        .support-email {
+            font-size: 14px;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+
+            .search-box {
+                width: 80%;
+            }
+
+
+            .search-button {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+
+
+            .filter-button {
+                margin-top: 10px;
+            }
+
+
+            .clear-button {
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+
+            .course-card {
+                width: 80%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            Smart E-Learning
+
+        </div>
+
+
+        <div>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'course_list' %}">
+                Courses
+            </a>
+
+            <a href="{% url 'tutor_home' %}">
+                AI Tutor
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="container">
+
+
+        <!-- HEADING -->
+
+        <div class="heading">
+
+            <i class="fa-solid fa-book-open-reader"></i>
+
+            <h1>
+                Explore Courses
+            </h1>
+
+            <p>
+                Learn new skills with our interactive courses.
+            </p>
+
+        </div>
+
+
+
+        <!-- SEARCH + FILTER -->
+
+        <div class="search-section">
+
+
+            <form method="GET"
+                  action="{% url 'course_list' %}"
+                  class="search-form">
+
+
+                <input
+                    type="text"
+                    name="search"
+                    class="search-box"
+                    placeholder="Search courses..."
+                    value="{{ search_query }}"
+                >
+
+
+                <button type="submit"
+                        class="search-button">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Search
+
+                </button>
+
+
+            </form>
+
+
+
+            <form method="GET"
+                  action="{% url 'course_list' %}"
+                  class="filter-area">
+
+
+                <label for="difficulty">
+
+                    <i class="fa-solid fa-filter"></i>
+
+                    Difficulty:
+
+                </label>
+
+
+                <select name="difficulty"
+                        id="difficulty">
+
+
+                    <option value="">
+                        All Levels
+                    </option>
+
+
+                    <option value="Beginner"
+                        {% if difficulty == "Beginner" %}selected{% endif %}>
+
+                        Beginner
+
+                    </option>
+
+
+                    <option value="Intermediate"
+                        {% if difficulty == "Intermediate" %}selected{% endif %}>
+
+                        Intermediate
+
+                    </option>
+
+
+                    <option value="Advanced"
+                        {% if difficulty == "Advanced" %}selected{% endif %}>
+
+                        Advanced
+
+                    </option>
+
+
+                </select>
+
+
+                <input type="hidden"
+                       name="search"
+                       value="{{ search_query }}">
+
+
+                <button type="submit"
+                        class="filter-button">
+
+                    Apply Filter
+
+                </button>
+
+
+                <a href="{% url 'course_list' %}"
+                   class="clear-button">
+
+                    Clear
+
+                </a>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- COURSE LIST -->
+
+        {% if courses %}
+
+
+            <div class="courses">
+
+
+                {% for course in courses %}
+
+
+                    <div class="course-card">
+
+
+                        <div class="course-icon">
+
+                            <i class="fa-solid fa-laptop-code"></i>
+
+                        </div>
+
+
+                        <h2>
+                            {{ course.title }}
+                        </h2>
+
+
+                        <p>
+                            {{ course.description }}
+                        </p>
+
+
+                        <div class="difficulty">
+
+                            <i class="fa-solid fa-signal"></i>
+
+                            {{ course.difficulty }}
+
+                        </div>
+
+
+                        <div class="course-info">
+
+
+                            <p>
+
+                                <i class="fa-solid fa-user-tie"></i>
+
+                                <strong>
+                                    Instructor:
+                                </strong>
+
+                                {{ course.instructor }}
+
+                            </p>
+
+
+                            <p>
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                <strong>
+                                    Duration:
+                                </strong>
+
+                                {{ course.duration }}
+
+                            </p>
+
+
+                        </div>
+
+
+                        <a href="{% url 'course_detail' course.id %}"
+                           class="view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                            View Course
+
+                        </a>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- NO RESULTS -->
+
+            <div class="no-results">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <h2>
+                    No Courses Found
+                </h2>
+
+                <p>
+                    Try searching with a different course name
+                    or select another difficulty level.
+                </p>
+
+
+                <a href="{% url 'course_list' %}"
+                   class="view-button">
+
+                    Show All Courses
+
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p class="support-title">
+            <i class="fa-solid fa-headset"></i>
+            Smart E-Learning Support Team
+        </p>
+
+        <p>
+            Need help? We are here to assist you.
+        </p>
+
+        <p class="support-email">
+            <i class="fa-solid fa-envelope"></i>
+            support@smartelearning.com
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
